@@ -3,6 +3,9 @@ name = "zen-space"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
+authors = authors = [
+    "Elaine Saijan <elainesaijan@gmail.com>",
+]
 package-mode = false
 
 [tool.poetry.dependencies]
@@ -13,5 +16,5 @@ openai = "^1.70.0"
 requests = "^2.32.3"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.7.0"]
 build-backend = "poetry.core.masonry.api"
