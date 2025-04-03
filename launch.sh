@@ -1,5 +1,6 @@
-uv venv
 
-uv sync
+poetry env activate
 
-uv run main.py
+poetry install
+
+poetry run python main.py
