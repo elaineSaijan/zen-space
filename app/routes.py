@@ -5,6 +5,9 @@ from openai import OpenAI
 
 main = Blueprint('main', __name__)
 delay_time = 0.03 #  faster
+system_role ="You are a helpful friend and therapist that offers asafe and supportive environment for the user to discuss their feelings and thoughts. " \
+"Use therapeutic techniques to address the user's mental health issues such as anxiety, depression, and stress." \
+"Help the user understand their emotions, develop coping strategies, and work through their personal challenges."
 
 @main.route('/')
 def chat():
@@ -26,7 +29,7 @@ def chat_with_gpt():
                         
             gpt_response = client.chat.completions.create(
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "system", "content": system_role},
                     {"role": "user", "content": user_message},
                 ],
                 model=model_name,

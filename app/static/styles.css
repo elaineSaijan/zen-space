@@ -26,44 +26,116 @@ form {
 
 input[type="text"] {
     padding: 10px;
-    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 button {
     padding: 10px;
-    background-color: #5cb85c;
+    background-color: #76b976;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button:hover {
     background-color: #4cae4c;
 }
 
-.chat-messages {
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
+.logo {
+    width: 200px; /* Adjust the size as needed */
+    height: auto;
+    display: block;
+    margin: 0 auto 0 auto;
+    margin-bottom: 30px; /* Add spacing after the logo */
+}
+
+.popup-container {
+    display: none; /* Initially hide the popup */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
     border-radius: 5px;
-    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
 }
 
-.message {
-    margin: 5px 0;
+#acceptButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px; /* Add spacing above the button */
 }
 
-.user {
-    font-weight: bold;
-    color: #007bff;
+.blurred {
+    filter: blur(5px);
+    pointer-events: none; /* Prevent interaction with blurred content */
 }
 
-.bot {
-    font-weight: bold;
-    color: #d9534f;
-}
+.gradient-background {
+    background: linear-gradient(91deg,#adb2d4,#c7d9dd,#d5e5d5,#eef1da);
+    background-size: 240% 240%;
+    animation: gradient-animation 10s ease infinite;
+    }
+
+    @keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+    }
+
+    .chat-container {
+        padding: 0px 80px 10px 80px;
+        border-radius: 10px;
+        background-color: rgba(204, 202, 181, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-message {
+        background-color: #569cd5;
+        color: #f7f7f7;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: right;
+        width: fit-content;
+        margin-left: auto; /* Align to the right */
+        margin-bottom: 10px; /* Add spacing below the message */
+    }
+
+    .gpt-message {
+        background-color: #5a5e61;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: left;
+        width: fit-content;
+        margin-right: auto; /* Align to the left */
+        margin-bottom: 10px; /* Add spacing below the message */
+    }
