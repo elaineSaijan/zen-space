@@ -3,7 +3,7 @@ name = "zen-space"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = authors = [
+authors = [
     "Elaine Saijan <elainesaijan@gmail.com>",
 ]
 package-mode = false
