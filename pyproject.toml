@@ -6,7 +6,6 @@ readme = "README.md"
 authors = [
     "Elaine Saijan <elainesaijan@gmail.com>",
 ]
-package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
