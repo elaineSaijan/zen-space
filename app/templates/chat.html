@@ -13,14 +13,11 @@
                 Hey Bestie! 
                 <br>
                 Before we dive in, just a quick vibe check— <strong>zen-space</strong> is a safe and judgment-free zone where you can vent, reflect, and chat with our AI-powered buddy. 💬✨
-                <br>
-                <br>
+                <br><br>
                 But real talk: <strong>zen-space</strong> is not a substitute for professional therapy. This is just a machine, and while it’s here to listen and offer friendly advice, it’s not a licensed therapist. If you're struggling, please reach out to a qualified mental health professional who can provide the support you truly deserve. 🫶
-                <br>
-                <br>
+                <br><br>
                 Take what <strong>zen-space</strong> says with a grain of salt, use it as a tool for self-reflection, and most importantly—be kind to yourself. You’re doing amazing, and you are not alone. 💖
-                <br>
-                <br>
+                <br><br>
                 By clicking <strong>Accept</strong>, you agree to use <strong>zen-space</strong> responsibly and understand that it’s here to support you, not replace professional help. If you’re ready to chat, hit that button below! Let’s get started on this journey together. 🌈
             </p>
             <button id="acceptButton">Accept</button>
@@ -29,64 +26,73 @@
     <div class="main-content" id="mainContent">
         <div class="chat-container">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Zen Space Logo" class="logo">
-            <div id="chat-box">
+            <div id="chat-messages">
                 <!-- Chat messages will be displayed here -->
             </div>
-            <form id="chat-form">
-                <input type="text" id="user-input" name="message" placeholder="What's on your mind today?" required>
+            <form id="chat-input">
+                <textarea id="user-input" placeholder="What's on your mind today?"></textarea>
+                <br>
                 <button type="submit">Send</button>
             </form>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/pop-up.js') }}"></script>
     <script>
-        const form = document.getElementById('chat-form');
-        const chatBox = document.getElementById('chat-box');
-    
+        const form = document.getElementById('chat-input');
+        const chatBox = document.getElementById('chat-messages');
+
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
             const userInput = document.getElementById('user-input').value;
-    
+
             // Display the user's message in the chat box
-            chatBox.innerHTML += `<div class="user-message">${userInput}</div>`;
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('user-message');
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+
             document.getElementById('user-input').value = '';
 
-        try {
-            // Send the message to the server
-            const response = await fetch('/send_message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userInput }),
-            });
+            // Scroll to the bottom of the chat messages
+            chatBox.scrollTop = form.scrollHeight;
 
-            // Check if the response is OK
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            try {
+                // Send the message to the server
+                const response = await fetch('/send_message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userInput }),
+                });
+
+                // Check if the response is OK
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Stream the GPT response
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let gptMessage = ''; // Accumulate the GPT response here
+                const gptMessageContainer = document.createElement('div');
+                gptMessageContainer.classList.add('gpt-message');
+                chatBox.appendChild(gptMessageContainer);
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    gptMessage += decoder.decode(value, { stream: true });
+                    gptMessageContainer.textContent = gptMessage; // Update the message incrementally
+                }
+
+                // Optionally, scroll to the bottom of the chat box
+                chatBox.scrollTop = form.scrollHeight;
+
+            } catch (error) {
+                console.error('Error:', error);
+                chatBox.innerHTML += `<div class="error-message">Error communicating with the server.</div>`;
             }
-
-            // Stream the GPT response
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let gptMessage = ''; // Accumulate the GPT response here
-            const gptMessageContainer = document.createElement('div');
-            gptMessageContainer.classList.add('gpt-message');
-            chatBox.appendChild(gptMessageContainer);
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                gptMessage += decoder.decode(value, { stream: true });
-                gptMessageContainer.textContent = gptMessage; // Update the message incrementally
-            }
-
-        } catch (error) {
-            console.error('Error:', error);
-            chatBox.innerHTML += `<div class="error-message">Error communicating with the server.</div>`;
-        }
-    
-
         });
     </script>
 </body>

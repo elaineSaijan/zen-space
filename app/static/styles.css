@@ -1,17 +1,17 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+html, body {
+    height: 100%;
     margin: 0;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -24,44 +24,23 @@ form {
     flex-direction: column;
 }
 
-input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px;
-    background-color: #76b976;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-button:hover {
-    background-color: #4cae4c;
-}
-
 .logo {
-    width: 200px; /* Adjust the size as needed */
+    width: 200px;
     height: auto;
     display: block;
-    margin: 0 auto 0 auto;
-    margin-bottom: 30px; /* Add spacing after the logo */
+    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .popup-container {
-    display: none; /* Initially hide the popup */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1000; /* Ensure it's on top */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
     overflow: scroll;
 }
 
@@ -75,8 +54,8 @@ button:hover {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
+    align-items: center;
+    justify-content: center;
 }
 
 #acceptButton {
@@ -86,21 +65,21 @@ button:hover {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 10px; /* Add spacing above the button */
+    /* margin-top: 5px; */
 }
 
 .blurred {
     filter: blur(5px);
-    pointer-events: none; /* Prevent interaction with blurred content */
+    pointer-events: none;
 }
 
 .gradient-background {
-    background: linear-gradient(91deg,#adb2d4,#c7d9dd,#d5e5d5,#eef1da);
+    background: linear-gradient(91deg, #adb2d4, #c7d9dd, #d5e5d5, #eef1da);
     background-size: 240% 240%;
     animation: gradient-animation 10s ease infinite;
-    }
+}
 
-    @keyframes gradient-animation {
+@keyframes gradient-animation {
     0% {
         background-position: 0% 50%;
     }
@@ -110,33 +89,102 @@ button:hover {
     100% {
         background-position: 0% 50%;
     }
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(204, 202, 181, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-input {
+    display: flex;
+    padding: 10px;
+}
+
+textarea {
+    flex: 1;
+    padding: 10px;
+    resize: none;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    overflow-y: auto;
+}
+
+#chat-input button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chat-input button:hover {
+    background-color: #45a049;
+}
+
+.user-message {
+    background-color: #569cd5;
+    color: #f7f7f7;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: right;
+    width: fit-content;
+    margin-left: auto;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.gpt-message {
+    background-color: #5a5e61;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+    width: fit-content;
+    margin-right: auto;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    #chat-input [type="text"] {
+        width: 90%;
     }
 
-    .chat-container {
-        padding: 0px 80px 10px 80px;
-        border-radius: 10px;
-        background-color: rgba(204, 202, 181, 0.2);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .user-message, .gpt-message {
+        max-width: 90%;
     }
 
-    .user-message {
-        background-color: #569cd5;
-        color: #f7f7f7;
+    .logo {
+        width: 80px;
+        margin-bottom: 20px;
+    }
+
+    .popup-content {
+        width: 90%;
         padding: 10px;
-        border-radius: 10px;
-        text-align: right;
-        width: fit-content;
-        margin-left: auto; /* Align to the right */
-        margin-bottom: 10px; /* Add spacing below the message */
+        border-radius: 5px;
+        max-width: 400px;
+        margin: 0 auto;
     }
-
-    .gpt-message {
-        background-color: #5a5e61;
-        color: #ffffff;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: left;
-        width: fit-content;
-        margin-right: auto; /* Align to the left */
-        margin-bottom: 10px; /* Add spacing below the message */
-    }
+}
