@@ -9,9 +9,11 @@ html, body {
 .main-content {
     flex: 1;
     display: flex;
+    flex-direction: column; /* Ensure vertical stacking */
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 0; /* Remove padding to align properly */
+    height: 100%; /* Take full height of the viewport */
 }
 
 h1 {
@@ -25,11 +27,12 @@ form {
 }
 
 .logo {
-    width: 200px;
+    width: 150px;
     height: auto;
     display: block;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .popup-container {
@@ -65,7 +68,6 @@ form {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    /* margin-top: 5px; */
 }
 
 .blurred {
@@ -95,17 +97,17 @@ form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Take full height of the parent */
     background-color: rgba(204, 202, 181, 0.2);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    padding: 10px;
+    position: relative;
 }
 
 .chat-messages {
-    flex: 1;
-    overflow-y: scroll;
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Enable scrolling */
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -114,6 +116,8 @@ form {
 #chat-input {
     display: flex;
     padding: 10px;
+    background-color: rgba(204, 202, 181, 0.2); /* Matches container background */
+    border-top: 1px solid #ccc; /* Optional: Add a separator */
 }
 
 textarea {
@@ -177,7 +181,6 @@ textarea {
 
     .logo {
         width: 80px;
-        margin-bottom: 20px;
     }
 
     .popup-content {
