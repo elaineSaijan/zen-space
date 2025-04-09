@@ -1,5 +1,9 @@
 # zen-space
 
+https://github.com/user-attachments/assets/7ea20dd0-cf8f-43d1-ab1e-a261fd7e4893
+
+
+
 ### 🌟 Objective
 Zen-Space was built as a creative side project to explore conversational AI and mental wellness. The goal is to create a judgment-free, digital space where users can express themselves and chat with a Gen Z-styled virtual therapist. This app provides an outlet to vent and reflect—but it’s not a substitute for real mental health care.
 
