@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>zen space 🌿</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Add marked.js -->
 </head>
 <body class="gradient-background">
     <div class="popup-container" id="popup">
@@ -88,7 +89,9 @@
                     const { done, value } = await reader.read();
                     if (done) break;
                     gptMessage += decoder.decode(value, { stream: true });
-                    gptMessageContainer.textContent = gptMessage; // Update the message incrementally
+
+                    // Render Markdown content using marked.js
+                    gptMessageContainer.innerHTML = marked.parse(gptMessage);
 
                     // Scroll to the bottom as the GPT message updates
                     scrollToBottom();
